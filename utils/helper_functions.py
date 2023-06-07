@@ -35,9 +35,6 @@ def load_nlp():
     nlp.add_pipe("entityLinker", last=True)
     return nlp
 
-def setup_openAI():
-    os.environ["OPENAI_API_KEY"] = "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"
-
 def preprocess_texts(raw_text):
     '''
     @param raw_text: the concatinated text to be processed
@@ -110,6 +107,22 @@ def obtain_graph_information(triples):
         entities.add(triple[2])
         relations.add(triple[1])
     return entities, relations
+
+def read_json_from_file(filepath):
+    '''
+    @param filepath: the file path where the json file is located
+    @return: the json object
+    '''
+    with open(filepath, "r") as f:
+        return json.load(f)
+
+def read_text_from_file(filepath):
+    '''
+    @param filepath: the path of the text file to read
+    @return: a reader object
+    '''
+    with open(filepath, 'r') as f:
+        return f.read()
 
 def obtain_connection_information(nlp ,entity_list):
     '''
