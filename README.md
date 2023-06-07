@@ -1,4 +1,9 @@
 # Codename Project IKARUS
+<div align="center">
+  <img src="underconstruction.png" width="100" height="100" alt="Under Construction">
+</div>
+This project is currently being worked on. More features and documentation will be added soon.
+
 [![Python 3.9](https://img.shields.io/badge/python-3.9-blue.svg)](https://www.python.org/downloads/release/python-390/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![License: MIT](https://img.shields.io/badge/langchain-0.0.189-<green>)](https://python.langchain.com/en/latest/index.html)
