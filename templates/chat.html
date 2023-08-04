@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chat Application</title>
+    <script>
+        function speak(text) {
+            var msg = new SpeechSynthesisUtterance();
+            msg.text = text;
+            window.speechSynthesis.speak(msg);
+        }
+
+        function startListening() {
+            if (window.hasOwnProperty('webkitSpeechRecognition')) {
+                var recognition = new webkitSpeechRecognition();
+                recognition.continuous = false;
+                recognition.interimResults = false;
+
+                recognition.lang = "en-US";
+                recognition.start();
+
+                recognition.onresult = function(e) {
+                    document.getElementById('question').value = e.results[0][0].transcript;
+                    recognition.stop();
+                };
+
+                recognition.onerror = function(e) {
+                    recognition.stop();
+                };
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Chat Application</h1>
+
+    <form action="/chat" method="POST">
+        <input type="text" id="question" name="question" placeholder="Type your question here or click the microphone to speak" required>
+        <input type="submit" value="Ask">
+    </form>
+    <button onclick="startListening()">🎙</button>
+
+    <ul id="chat-history">
+        {% for q, a in chat_history %}
+            <li><strong>You:</strong> {{ q }}</li>
+            <li><strong>System:</strong> {{ a }}</li>
+        {% endfor %}
+    </ul>
+
+    <script>
+        var chatHistory = document.getElementById('chat-history');
+        var lastResponse = chatHistory.lastElementChild;
+        if (lastResponse) {
+            speak(lastResponse.textContent);
+        }
+    </script>
+</body>
+</html>
